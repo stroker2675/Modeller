@@ -1,0 +1,23 @@
+{
+  "name": "cost-model-builder",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cost Model Builder: deterministic cleaning-tender pricing engine, Copilot Managed Runtime app and test harness",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "build:standalone": "node tools/build.mjs --standalone --out dist-standalone",
+    "dev": "node tools/dev.mjs",
+    "dev:strict": "node tools/dev.mjs --strict",
+    "vendor": "node -e \"const fs=require('fs'),s='node_modules/maplibre-gl/',d='vendor/maplibre/';fs.mkdirSync(d,{recursive:true});for(const[f,t]of[['dist/maplibre-gl-csp.js'],['dist/maplibre-gl-csp-worker.js'],['dist/maplibre-gl.css'],['LICENSE.txt']])fs.copyFileSync(s+f,d+(t||f.split('/').pop()));console.log('vendor/maplibre refreshed from node_modules')\"",
+    "csp": "node tools/csp-check.mjs dist",
+    "test": "node --test tests/platform.test.mjs"
+  },
+  "dependencies": {
+    "@microsoft/managed-apps": "0.5.17",
+    "maplibre-gl": "5.24.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

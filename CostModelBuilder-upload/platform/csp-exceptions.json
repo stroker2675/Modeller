@@ -1,0 +1,18 @@
+{
+  "why": "The optional street map in the estate map. MapLibre GL JS (vendored, BSD-3-Clause) draws OpenFreeMap's Positron style. Without these exceptions the app still works: the street map button is disabled with the reason, and the built-in outline map shows the same figures.",
+  "directives": {
+    "connect-src": ["https://tiles.openfreemap.org"],
+    "worker-src": ["'self'"],
+    "img-src": ["blob:"]
+  },
+  "files": {
+    "vendor/maplibre/maplibre-gl-csp.js": {
+      "allow": ["web worker (worker-src 'none')", "javascript: URL"],
+      "note": "MapLibre starts its tile worker from vendor/maplibre/maplibre-gl-csp-worker.js (same origin, set by map-street.js). The javascript: string is an internal link-sanitising check, not a navigation."
+    },
+    "vendor/maplibre/maplibre-gl-csp-worker.js": {
+      "allow": ["web worker (worker-src 'none')", "javascript: URL", "fetch to another origin (connect-src 'self'; use a connector)"],
+      "note": "The worker fetches tiles, glyphs and sprites from tiles.openfreemap.org only, as listed in connect-src."
+    }
+  }
+}
